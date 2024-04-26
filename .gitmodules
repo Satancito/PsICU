@@ -1,0 +1,4 @@
+[submodule "PsCoreFxs"]
+	path = submodules/PsCoreFxs
+	url = https://github.com/Satancito/PsCoreFxs
+	branch = main
