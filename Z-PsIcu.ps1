@@ -25,13 +25,13 @@ $__PSICU_HOST_BUILD_CONFIGURATIONS = [ordered]@{
         Name                   = "Debug"
         CurrentWorkingDir      = "$__PSICU_ICU_SOURCE_DIR/Bin/Debug/Host"
         ConfigurationOption         = @("--enable-debug")
-        IcuConfigureParameters = @("--enable-static=yes", "--enable-shared=yes")
+        Options = @("--enable-static=yes", "--enable-shared=yes")
     }
     Release = [ordered]@{
         Name                   = "Release"
         CurrentWorkingDir      = "$__PSICU_ICU_SOURCE_DIR/Bin/Release/Host"
         ConfigurationOption         = @()
-        IcuConfigureParameters = @("--enable-static=yes", "--enable-shared=yes")
+        Options = @("--enable-static=yes", "--enable-shared=yes")
 
     }
 }; $null = $__PSICU_HOST_BUILD_CONFIGURATIONS
@@ -142,6 +142,31 @@ function Get-IcuSources {
     $rootDirExists = $(Test-Path -Path "$($__PSICU_ICU_ROOT_DIR)" -PathType Container)
     if (!$rootDirExists -or $Force.IsPresent) {
         Expand-ZipArchive -Path "$($__PSICU_ICU_DOWNLOAD_FILENAME)" -DestinationPath "$__PSICU_TEMP_DIR"
+    }
+}
+
+function Remove-PsIcu {
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [switch]
+        $RemoveWsl
+    )
+    Write-InfoBlue "Removing PsIcu"
+    Write-Host "$__PSICU_TEMP_DIR"
+    Remove-Item -Path "$__PSICU_TEMP_DIR" -Force -Recurse -ErrorAction Ignore
+    if($IsWindows -and $RemoveWsl.IsPresent)
+    {
+        $scriptParameters = @{
+            "Script" = (Get-WslPath -Path "$PSCommandPath")
+        }
+        Write-Host "Removing in WSL."
+        & wsl pwsh -Command {
+            $params = $args[0]
+            Write-Host "Wsl User: " -NoNewline ; & whoami
+            Import-Module -Name "$($params.Script)" -Force -NoClobber
+            Remove-PsIcu
+        } -args $scriptParameters
     }
 }
 
