@@ -99,9 +99,9 @@ function Build-IcuLibrary {
             Push-Location "$($configuration.CurrentWorkingDir)"
             $prefix = "$($configuration.CurrentWorkingDir)/Dist"
             $null = Test-ExternalCommand -Command "sh `"$__PSICU_ICU_SOURCE_DIR/runConfigureICU`" $($configuration.ConfigurationOption) `"$(Get-IcuAndroidHostPlatform)`" --prefix=`"$prefix`" $($configuration.Options) $IcuConfigureOptions" -ThrowOnFailure -NoAssertion
-            $null = Test-ExternalCommand -Command "make -j16" -ThrowOnFailure -NoAssertion
+            $null = Test-ExternalCommand -Command "`"$__PSCOREFXS_MAKE_EXE`" -j16" -ThrowOnFailure -NoAssertion
             Remove-Item -Path "$prefix" -Force -Recurse -ErrorAction Ignore
-            $null = Test-ExternalCommand -Command "make install" -ThrowOnFailure -NoAssertion
+            $null = Test-ExternalCommand -Command "`"$__PSCOREFXS_MAKE_EXE`" install" -ThrowOnFailure -NoAssertion
         }
         finally {
             Pop-Location
