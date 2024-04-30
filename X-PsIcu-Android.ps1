@@ -24,7 +24,7 @@ param (
     [string[]]
     $IcuConfigureOptions = @() ,
 
-    [Parameter(ParameterSetName = "Remove_Temp")]
+    [Parameter(Mandatory=$true, ParameterSetName = "Remove_Temp")]
     [switch]
     $Clean
 )
@@ -132,7 +132,7 @@ function Build-IcuLibrary {
         $env:CXXFLAGS = [string]::Empty
 
         try {
-            $prefix = "$DestinationDir/$([string]::Format($configuration.DistDirName, $AndroidAPI))$DistDirSuffix"
+            $prefix = "$DestinationDir/$($configuration.DistDirName -f $AndroidAPI)$DistDirSuffix"
             Write-Host
             Write-InfoBlue "█ PsIcu - Building `"$prefix`""
             Write-Host
@@ -141,12 +141,18 @@ function Build-IcuLibrary {
             $null = Test-ExternalCommand -Command "sh `"$__PSICU_ICU_SOURCE_DIR/configure`" --host=`"$target`" --with-cross-build=`"$($hostConfiguration.CurrentWorkingDir)`" $($configuration.ConfigurationOption) --prefix=`"$prefix`" $($configuration.Options) $IcuConfigureOptions " -ThrowOnFailure -NoAssertion
             $null = Test-ExternalCommand -Command "make -j16" -ThrowOnFailure -NoAssertion
             Remove-Item -Path "$prefix" -Force -Recurse -ErrorAction Ignore
-            $null = Test-ExternalCommand -Command "make install" -ThrowOnFailure -NoAssertion
+            $null = Test-ExternalCommand -Command "`"$__PSCOREFXS_MAKE_EXE`" install" -ThrowOnFailure -NoAssertion
         }
         finally {
             Pop-Location
+            Remove-Item -Path "$($configuration.CurrentWorkingDir)" -Force -Recurse -ErrorAction Ignore
         }
-    }    
+    }   
+    
+    $__PSICU_HOST_BUILD_CONFIGURATIONS.Keys | ForEach-Object {
+        $configuration = $__PSICU_HOST_BUILD_CONFIGURATIONS["$_"]
+        Remove-Item -Path "$($configuration.CurrentWorkingDir)" -Force -Recurse -ErrorAction Ignore
+    }
 }
 
 

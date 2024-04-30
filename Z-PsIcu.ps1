@@ -19,6 +19,12 @@ function Get-IcuAndroidHostLdFlags {
         return "-Wl,-dead_strip"
     }
 }
+$__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT = @{
+    Emscripten     = "ICU-$__PSICU_ICU_VERSION-Esmcripten-Wasm-{0}" # 0=Configuration
+    Android        = "ICU-$__PSICU_ICU_VERSION-Android-Api{0}-{1}-{2}" # 0=ApiLevel / 1=Abi / 2=Configuration
+    WindowsDesktop = "ICU-$__PSICU_ICU_VERSION-Windows-Desktop-{0}-{1}" # 0=Architecture / 1=Configuration
+    WindowsUWP     = "ICU-$__PSICU_ICU_VERSION-Windows-UWP-{0}-{1}" # 0=Architecture / 1=Configuration
+}
 
 $__PSICU_HOST_BUILD_CONFIGURATIONS = [ordered]@{
     Debug   = [ordered]@{
@@ -32,7 +38,6 @@ $__PSICU_HOST_BUILD_CONFIGURATIONS = [ordered]@{
         CurrentWorkingDir      = "$__PSICU_ICU_SOURCE_DIR/Bin/Release/Host"
         ConfigurationOption         = @()
         Options = @("--enable-static=yes", "--enable-shared=yes")
-
     }
 }; $null = $__PSICU_HOST_BUILD_CONFIGURATIONS
 
@@ -46,7 +51,7 @@ $__PSICU_ANDROID_BUILD_CONFIGURATIONS = [ordered]@{
         Options           = @("--enable-static=yes", "--enable-shared=yes")
         ConfigurationOption    = @("--enable-debug")
         CurrentWorkingDir = "$__PSICU_ICU_SOURCE_DIR/Bin/Debug/Android-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Name)"
-        DistDirName       = "ICU-$__PSICU_ICU_VERSION-Android-Api{0}-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Name)-Debug"     
+        DistDirName       = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Name)", "Debug")
     }
     "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)-Debug"   = @{ 
         Name              = "Debug"
@@ -56,7 +61,7 @@ $__PSICU_ANDROID_BUILD_CONFIGURATIONS = [ordered]@{
         Options           = @("--enable-static=yes", "--enable-shared=yes")
         ConfigurationOption    = @("--enable-debug")
         CurrentWorkingDir = "$__PSICU_ICU_SOURCE_DIR/Bin/Debug/Android-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)"
-        DistDirName       = "ICU-$__PSICU_ICU_VERSION-Android-Api{0}-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)-Debug"     
+        DistDirName       = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)", "Debug")
     }
     "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)-Debug"     = @{ 
         Name              = "Debug"
@@ -66,7 +71,7 @@ $__PSICU_ANDROID_BUILD_CONFIGURATIONS = [ordered]@{
         Options           = @("--enable-static=yes", "--enable-shared=yes")
         ConfigurationOption    = @("--enable-debug")
         CurrentWorkingDir = "$__PSICU_ICU_SOURCE_DIR/Bin/Debug/Android-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)"
-        DistDirName       = "ICU-$__PSICU_ICU_VERSION-Android-Api{0}-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)-Debug"   
+        DistDirName       = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)", "Debug")
     }
     "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)-Debug"     = @{ 
         Name              = "Debug"
@@ -76,7 +81,7 @@ $__PSICU_ANDROID_BUILD_CONFIGURATIONS = [ordered]@{
         Options           = @("--enable-static=yes", "--enable-shared=yes")
         ConfigurationOption    = @("--enable-debug")
         CurrentWorkingDir = "$__PSICU_ICU_SOURCE_DIR/Bin/Debug/Android-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)"
-        DistDirName       = "ICU-$__PSICU_ICU_VERSION-Android-Api{0}-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)-Debug"   
+        DistDirName       = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)", "Debug")
     }
 
     "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Name)-Release"   = @{ 
@@ -87,7 +92,7 @@ $__PSICU_ANDROID_BUILD_CONFIGURATIONS = [ordered]@{
         Options           = @("--enable-static=yes", "--enable-shared=yes")
         ConfigurationOption    = @()
         CurrentWorkingDir = "$__PSICU_ICU_SOURCE_DIR/Bin/Release/Android-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Name)"
-        DistDirName       = "ICU-$__PSICU_ICU_VERSION-Android-Api{0}-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Name)-Release"
+        DistDirName       = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Name)", "Release")
     }
     "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)-Release" = @{ 
         Name              = "Release"
@@ -97,7 +102,7 @@ $__PSICU_ANDROID_BUILD_CONFIGURATIONS = [ordered]@{
         Options           = @("--enable-static=yes", "--enable-shared=yes")
         ConfigurationOption    = @()
         CurrentWorkingDir = "$__PSICU_ICU_SOURCE_DIR/Bin/Release/Android-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)"
-        DistDirName       = "ICU-$__PSICU_ICU_VERSION-Android-Api{0}-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)-Release" 
+        DistDirName       = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)", "Release")
     }
     "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)-Release"   = @{ 
         Name              = "Release"
@@ -107,7 +112,7 @@ $__PSICU_ANDROID_BUILD_CONFIGURATIONS = [ordered]@{
         Options           = @("--enable-static=yes", "--enable-shared=yes")
         ConfigurationOption    = @()
         CurrentWorkingDir = "$__PSICU_ICU_SOURCE_DIR/Bin/Release/Android-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)"
-        DistDirName       = "ICU-$__PSICU_ICU_VERSION-Android-Api{0}-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)-Release" 
+        DistDirName       = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)", "Release")
     }
     "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)-Release"   = @{ 
         Name              = "Release"
@@ -117,7 +122,7 @@ $__PSICU_ANDROID_BUILD_CONFIGURATIONS = [ordered]@{
         Options           = @("--enable-static=yes", "--enable-shared=yes")
         ConfigurationOption    = @()
         CurrentWorkingDir = "$__PSICU_ICU_SOURCE_DIR/Bin/Release/Android-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)"
-        DistDirName       = "ICU-$__PSICU_ICU_VERSION-Android-Api{0}-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)-Release"  
+        DistDirName       = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)", "Release")
     }
 }; $null = $__PSICU_ANDROID_BUILD_CONFIGURATIONS
 
@@ -169,6 +174,3 @@ function Remove-PsIcu {
         } -args $scriptParameters
     }
 }
-
-
-
