@@ -24,7 +24,7 @@ param (
     [string[]]
     $IcuConfigureOptions = @() ,
 
-    [Parameter(Mandatory=$true, ParameterSetName = "Remove_Temp")]
+    [Parameter(Mandatory = $true, ParameterSetName = "Remove_Temp")]
     [switch]
     $Clean
 )
@@ -156,8 +156,7 @@ function Build-IcuLibrary {
 }
 
 
-if($Clean.IsPresent)
-{
+if ($Clean.IsPresent) {
     Remove-PsIcu -RemoveWsl
     exit
 }
