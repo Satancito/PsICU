@@ -30,13 +30,13 @@ $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT = @{
 # MARK: █ Hosts build configurations
 $__PSICU_HOST_BUILD_CONFIGURATIONS = [ordered]@{
     Debug   = [ordered]@{
-        Name                = "Debug"
+        Name                = $__PSCOREFXS_DEBUG_CONFIGURATION
         CurrentWorkingDir   = "$__PSICU_ICU_SOURCE_DIR/Bin/Debug/Host"
         ConfigurationOption = @("--enable-debug")
         Options             = @("--enable-static=yes", "--enable-shared=yes")
     }
     Release = [ordered]@{
-        Name                = "Release"
+        Name                = $__PSCOREFXS_RELEASE_CONFIGURATION
         CurrentWorkingDir   = "$__PSICU_ICU_SOURCE_DIR/Bin/Release/Host"
         ConfigurationOption = @()
         Options             = @("--enable-static=yes", "--enable-shared=yes")
@@ -45,86 +45,86 @@ $__PSICU_HOST_BUILD_CONFIGURATIONS = [ordered]@{
 
 # MARK: █ Android build configurations
 $__PSICU_ANDROID_BUILD_CONFIGURATIONS = [ordered]@{
-    "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Name)-Debug"     = @{ 
-        Name                = "Debug"
+    "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.NameDebug)"     = [ordered]@{ 
+        Name                = $__PSCOREFXS_DEBUG_CONFIGURATION
         AbiName             = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Name)"
         Abi                 = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Abi)"
         Triplet             = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Triplet)"
         Options             = @("--enable-static=yes", "--enable-shared=yes")
         ConfigurationOption = @("--enable-debug")
         CurrentWorkingDir   = "$__PSICU_ICU_SOURCE_DIR/Bin/Debug/Android-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Name)"
-        DistDirName         = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Name)", "Debug")
+        DistDirName         = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Name)", $__PSCOREFXS_DEBUG_CONFIGURATION)
     }
-    "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)-Debug"   = @{ 
-        Name                = "Debug"
+    "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.NameDebug)"   = [ordered]@{ 
+        Name                = $__PSCOREFXS_DEBUG_CONFIGURATION
         AbiName             = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)"
         Abi                 = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Abi)"
         Triplet             = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Triplet)"
         Options             = @("--enable-static=yes", "--enable-shared=yes")
         ConfigurationOption = @("--enable-debug")
         CurrentWorkingDir   = "$__PSICU_ICU_SOURCE_DIR/Bin/Debug/Android-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)"
-        DistDirName         = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)", "Debug")
+        DistDirName         = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)", $__PSCOREFXS_DEBUG_CONFIGURATION)
     }
-    "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)-Debug"     = @{ 
-        Name                = "Debug"
+    "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.NameDebug)"     = [ordered]@{ 
+        Name                = $__PSCOREFXS_DEBUG_CONFIGURATION
         AbiName             = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)"
         Abi                 = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Abi)"
         Triplet             = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Triplet)"
         Options             = @("--enable-static=yes", "--enable-shared=yes")
         ConfigurationOption = @("--enable-debug")
         CurrentWorkingDir   = "$__PSICU_ICU_SOURCE_DIR/Bin/Debug/Android-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)"
-        DistDirName         = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)", "Debug")
+        DistDirName         = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)", $__PSCOREFXS_DEBUG_CONFIGURATION)
     }
-    "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)-Debug"     = @{ 
-        Name                = "Debug"
+    "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.NameDebug)"     = [ordered]@{ 
+        Name                = $__PSCOREFXS_DEBUG_CONFIGURATION
         AbiName             = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)"
         Abi                 = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Abi)"
         Triplet             = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Triplet)"
         Options             = @("--enable-static=yes", "--enable-shared=yes")
         ConfigurationOption = @("--enable-debug")
         CurrentWorkingDir   = "$__PSICU_ICU_SOURCE_DIR/Bin/Debug/Android-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)"
-        DistDirName         = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)", "Debug")
+        DistDirName         = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)", $__PSCOREFXS_DEBUG_CONFIGURATION)
     }
 
-    "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Name)-Release"   = @{ 
-        Name                = "Release"
+    "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.NameRelease)"   = [ordered]@{ 
+        Name                = $__PSCOREFXS_RELEASE_CONFIGURATION
         AbiName             = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Name)"
         Abi                 = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Abi)"
         Triplet             = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Triplet)"
         Options             = @("--enable-static=yes", "--enable-shared=yes")
         ConfigurationOption = @()
         CurrentWorkingDir   = "$__PSICU_ICU_SOURCE_DIR/Bin/Release/Android-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Name)"
-        DistDirName         = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Name)", "Release")
+        DistDirName         = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm.Name)", $__PSCOREFXS_RELEASE_CONFIGURATION)
     }
-    "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)-Release" = @{ 
-        Name                = "Release"
+    "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.NameRelease)" = [ordered]@{ 
+        Name                = $__PSCOREFXS_RELEASE_CONFIGURATION
         AbiName             = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)"
         Abi                 = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Abi)"
         Triplet             = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Triplet)" 
         Options             = @("--enable-static=yes", "--enable-shared=yes")
         ConfigurationOption = @()
         CurrentWorkingDir   = "$__PSICU_ICU_SOURCE_DIR/Bin/Release/Android-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)"
-        DistDirName         = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)", "Release")
+        DistDirName         = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.Arm64.Name)", $__PSCOREFXS_RELEASE_CONFIGURATION)
     }
-    "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)-Release"   = @{ 
-        Name                = "Release"
+    "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.NameRelease)"   = [ordered]@{ 
+        Name                = $__PSCOREFXS_RELEASE_CONFIGURATION
         AbiName             = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)"
         Abi                 = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Abi)"
         Triplet             = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Triplet)"
         Options             = @("--enable-static=yes", "--enable-shared=yes")
         ConfigurationOption = @()
         CurrentWorkingDir   = "$__PSICU_ICU_SOURCE_DIR/Bin/Release/Android-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)"
-        DistDirName         = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)", "Release")
+        DistDirName         = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X86.Name)", $__PSCOREFXS_RELEASE_CONFIGURATION)
     }
-    "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)-Release"   = @{ 
-        Name                = "Release"
+    "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.NameRelease)"   = [ordered]@{ 
+        Name                = $__PSCOREFXS_RELEASE_CONFIGURATION
         AbiName             = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)"
         Abi                 = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Abi)"
         Triplet             = "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Triplet)"
         Options             = @("--enable-static=yes", "--enable-shared=yes")
         ConfigurationOption = @()
         CurrentWorkingDir   = "$__PSICU_ICU_SOURCE_DIR/Bin/Release/Android-$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)"
-        DistDirName         = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)", "Release")
+        DistDirName         = $__PSICU_ICU_PLATFORM_DIST_DIR_NAME_FORMAT.Android -f @("{0}", "$($__PSCOREFXS_ANDROIDNDK_ANDROID_ABI_CONFIGURATIONS.X64.Name)", $__PSCOREFXS_RELEASE_CONFIGURATION)
     }
 }; $null = $__PSICU_ANDROID_BUILD_CONFIGURATIONS
 

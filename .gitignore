@@ -1,0 +1,17 @@
+Build/
+build/
+Dist/
+dist/
+Out/
+out/
+logs/
+Logs/
+Temp/
+Tmp/
+temp/
+tmp/
+.cache/
+.vscode/
+.idea/
+deps/
+node_modules/
