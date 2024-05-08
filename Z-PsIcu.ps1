@@ -167,8 +167,8 @@ function Remove-PsIcu {
         $scriptParameters = @{
             "Script" = (Get-WslPath -Path "$PSCommandPath")
         }
-        Write-Host "Removing in WSL."
         & wsl pwsh -Command {
+            Write-Host "Removing in WSL."
             $params = $args[0]
             Write-Host "Wsl User: " -NoNewline ; & whoami
             Import-Module -Name "$($params.Script)" -Force -NoClobber

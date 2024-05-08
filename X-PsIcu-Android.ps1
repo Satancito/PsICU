@@ -93,6 +93,8 @@ function Build-IcuLibrary {
             Write-Host
             Write-InfoBlue "█ PsIcu - Building host lib - Configuration: $($configuration.Name) - Host Platform: $(Get-IcuAndroidHostPlatform)"
             Write-Host
+            $env:CFLAGS = "-fPIC"
+            $env:CXXFLAGS = "-fPIC"
             $env:CPPFLAGS = "$preprocessorFlags"
             $env:LDFLAGS = "$ldFlags"
             New-Item -Path "$($configuration.CurrentWorkingDir)" -ItemType Directory -Force | Out-Null
@@ -110,7 +112,7 @@ function Build-IcuLibrary {
 
     $ndkProps = $__PSCOREFXS_ANDROID_NDK_OS_VARIANTS["$(Get-OsName -Minimal)"]
 
-    $ldFlags = "-lc -lstdc++ -Wl,--gc-sections"
+    $ldFlags = "-ldl -Wl,--gc-sections"
     $__PSICU_ANDROID_BUILD_CONFIGURATIONS.Keys | ForEach-Object {
         $configuration = $__PSICU_ANDROID_BUILD_CONFIGURATIONS["$_"]
         $hostConfiguration = $__PSICU_HOST_BUILD_CONFIGURATIONS["$($configuration.Name)"]
@@ -128,8 +130,8 @@ function Build-IcuLibrary {
         $env:STRIP = "$toolchainsDir/bin/llvm-strip"
         $env:CPPFLAGS = $preprocessorFlags
         $env:LDFLAGS = $ldFlags
-        $env:CFLAGS = [string]::Empty
-        $env:CXXFLAGS = [string]::Empty
+        $env:CFLAGS = "-fPIC"
+        $env:CXXFLAGS = "-fPIC"
 
         try {
             $prefix = "$DestinationDir/$($configuration.DistDirName -f $AndroidAPI)$DistDirSuffix"
