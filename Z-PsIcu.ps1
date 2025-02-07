@@ -3,8 +3,8 @@ Import-Module -Name "$PSScriptRoot/submodules/PsCoreFxs/Z-PsCoreFxs.ps1" -Force 
 # MARK: █ Constants
 $__PSICU_GITHUB_URL = "https://github.com/Satancito/PsICU.git"; $null = $__PSICU_GITHUB_URL
 $__PSICU_TEMP_DIR = "$(Get-UserHome)/.PsIcu"; $null = $__PSICU_TEMP_DIR
-$__PSICU_ICU_VERSION = "75.1" #Update on next version
-$__PSICU_ICU_DOWNLOAD_SHA1 = "46619717D43E9C0D028C89EE5D9AE9263C87256E"; # Update on next version
+$__PSICU_ICU_VERSION = "76.1" # █> Update on next version
+$__PSICU_ICU_DOWNLOAD_SHA1 = "8E3CA391A26F27C843EE03E4B11B220003886D5B"; # █> Update on next version
 $__PSICU_ICU_DOWNLOAD_URL = "https://github.com/unicode-org/icu/archive/refs/tags/release-$($__PSICU_ICU_VERSION.Replace(".", "-")).zip"; $null = $__PSICU_ICU_DOWNLOAD_URL
 $__PSICU_ICU_DOWNLOAD_NAME = "icu-release-$($__PSICU_ICU_VERSION.Replace(".", "-")).zip"
 $__PSICU_ICU_DOWNLOAD_FILENAME = "$__PSICU_TEMP_DIR/$__PSICU_ICU_DOWNLOAD_NAME"; $null = $__PSICU_ICU_DOWNLOAD_FILENAME
