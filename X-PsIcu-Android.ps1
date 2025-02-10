@@ -47,11 +47,7 @@ function Test-DependencyTools {
 
 
 function Build-IcuLibrary {
-    if ([string]::IsNullOrWhiteSpace($AndroidAPI)) {
-        $AndroidAPI = [AndroidNDKApiValidateSet]::ValidValues | Select-Object -Last 1
-    }
-    
-    Assert-AndroidNDKApi -Api $AndroidAPI
+    $AndroidAPI = $AndroidAPI = Get-ValidAndroidNDKApi -Api $AndroidAPI -Latest -Assert
     
     $DestinationDir = [string]::IsNullOrWhiteSpace($DestinationDir) ? "$(Get-CppLibsDir)" : $DestinationDir
     if ($IsWindows) {
